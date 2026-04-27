@@ -210,27 +210,28 @@ function dessinerProjectile() {
 // À la place : onde de dégâts pendant la course.
 // ============================================================
 
-let chargeEtat  = "inactif";
-let chargeTimer = 0;
+let chargeEtat      = "inactif";
+let chargeTimer     = 0;
+let chargeADejaTouch = false;
 
 function declencherCharge() {
-  let cfg        = getConfigMonstre();
-  chargeEtat     = "demarrage";
-  chargeTimer    = 0;
-  monstre.enCharge = true;
+  let cfg           = getConfigMonstre();
+  chargeEtat        = "demarrage";
+  chargeTimer       = 0;
+  chargeADejaTouch  = false;
+  monstre.enCharge  = true;
   monstre.velociteX = 0;
   setAnimMonstre("special");
   monstre.frameAnim = 0;
 
-  // Après les 2 premières frames → lancer la course
   setTimeout(function() {
     if (!combatEnCours || !monstre.enCharge) { return; }
     chargeEtat        = "course";
+    chargeADejaTouch  = false;
     let vit           = (cfg.VITESSE_CHARGE || 10) * 1.5;
     monstre.velociteX = monstre.regardeADroite ? vit : -vit;
   }, getAnimData("special").duree * 2);
 
-  // Fin de la charge après 2 secondes
   setTimeout(function() {
     if (!combatEnCours) { return; }
     chargeEtat        = "inactif";
@@ -246,7 +247,6 @@ function mettreAJourCharge(deltaTime) {
 
   chargeTimer += deltaTime;
 
-  // Alterner frames Special 3 et 4 pendant la course
   let dureeFrame = getAnimData("special").duree;
   if (chargeTimer >= dureeFrame) {
     chargeTimer       = 0;
@@ -261,17 +261,18 @@ function mettreAJourCharge(deltaTime) {
     monstre.auSol     = false;
   }
 
-  // Onde de dégâts autour du monstre pendant la course (pas de contact direct)
-  if (!combattant.invincible) {
-    let mcx = monstre.x + monstre.largeur / 2;
-    let mcy = monstre.y + monstre.hauteur / 2;
-    let jcx = combattant.x + combattant.largeur / 2;
-    let jcy = combattant.y + combattant.hauteur / 2;
-    let dx  = jcx - mcx;
-    let dy  = jcy - mcy;
-    let dist = Math.sqrt(dx * dx + dy * dy);
+  // Dégâts une seule fois par charge (flag remis à false après invincibilité)
+  if (!combattant.invincible && !chargeADejaTouch) {
+    let mcx  = monstre.x + monstre.largeur / 2;
+    let mcy  = monstre.y + monstre.hauteur / 2;
+    let jcx  = combattant.x + combattant.largeur / 2;
+    let jcy  = combattant.y + combattant.hauteur / 2;
+    let dist = Math.sqrt((jcx - mcx) * (jcx - mcx) + (jcy - mcy) * (jcy - mcy));
     if (dist < 120) {
+      chargeADejaTouch = true;
       appliquerDegatsSpeciaux(1.8);
+      // Réarmer après la durée d'invincibilité
+      setTimeout(function() { chargeADejaTouch = false; }, combattant.DUREE_INVINCIBLE + 50);
     }
   }
 }
