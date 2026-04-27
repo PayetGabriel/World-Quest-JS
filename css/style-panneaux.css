@@ -1,0 +1,266 @@
+/* =====================
+   PANNEAUX OVERLAY
+   ===================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap');
+
+.panneau {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  display: none;
+  color: #e8f0f0;
+  z-index: 80;
+  font-family: 'Exo 2', Arial, sans-serif;
+  overflow: visible;
+  background: #5d7a7a;
+  border-radius: 15px;
+  outline: 1px solid #000;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.7),
+    0 0 0 1px #000,
+    0 0 0 9px #7a9898,
+    0 0 0 10px #000;
+}
+
+.panneau::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0));
+  border-radius: 15px 15px 0 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.panneau-entete,
+.panneau-corps { position: relative; z-index: 1; }
+
+.panneau-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panneau-entete-gauche { display: flex; flex-direction: column; }
+
+.panneau-titre {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.panneau-sous-titre {
+  font-size: 11px;
+  color: #a8c4c4;
+  margin-top: 3px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.panneau-fermer {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #a8c4c4;
+  font-size: 14px;
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.panneau-fermer:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+.panneau-corps {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 62vh;
+  overflow-y: auto;
+}
+
+.panneau-corps::-webkit-scrollbar { width: 5px; }
+.panneau-corps::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.15); border-radius: 3px; }
+.panneau-corps::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+
+/* =====================
+   ITEMS
+   ===================== */
+
+.item-ligne {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #4a6363;
+  border-radius: 10px;
+  padding: 11px 14px;
+  transition: background 0.15s;
+}
+
+.item-ligne:hover { background: #527070; }
+
+.item-icone { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; }
+
+#panneau-competences .item-icone { width: 46px; height: 46px; }
+
+.item-info { flex: 1; min-width: 0; }
+
+.item-nom {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.item-desc {
+  font-size: 11px;
+  color: #a0b8b8;
+  margin-top: 2px;
+}
+
+.item-droite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.item-count {
+  font-size: 12px;
+  color: #c8e0e0;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.item-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #e8f0f0;
+  font-size: 12px;
+  font-family: 'Exo 2', Arial, sans-serif;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.item-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #f0d060;
+  border-color: rgba(240, 208, 96, 0.5);
+}
+
+.item-btn-or {
+  background: rgba(240, 200, 64, 0.15);
+  border-color: rgba(240, 200, 64, 0.4);
+  color: #f0d060;
+}
+
+.item-btn-or:hover { background: rgba(240, 200, 64, 0.28); }
+
+/* =====================
+   SUCCÈS
+   ===================== */
+
+.succes-ligne {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  background: #4a6363;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.succes-ligne:hover { background: #527070; }
+.succes-etoile { font-size: 18px; color: #6a8888; width: 20px; text-align: center; flex-shrink: 0; }
+.succes-nom    { flex: 1; font-size: 13px; color: #e8f0f0; font-weight: 600; }
+.succes-pays   { font-size: 11px; color: #90aaaa; }
+
+/* =====================
+   SHOP / COMPÉTENCES
+   ===================== */
+
+.comp-points { font-size: 12px; color: #a8c4c4; letter-spacing: 0.3px; padding: 2px 0 4px; }
+.shop-or     { font-size: 13px; color: #f0d060; font-weight: 700; padding: 2px 0 4px; }
+
+/* =====================
+   PARAMÈTRES
+   ===================== */
+
+.param-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #e8f0f0;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.param-ligne:last-of-type { border-bottom: none; }
+
+.param-select {
+  background: #4a6363;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e8f0f0;
+  font-size: 12px;
+  font-family: 'Exo 2', Arial, sans-serif;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.param-version { font-size: 11px; color: #7a9898; margin-top: 6px; text-align: center; letter-spacing: 0.5px; }
+
+/* =====================
+   MAP PLEIN ÉCRAN
+   ===================== */
+
+#panneau-map {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: none;
+  z-index: 80;
+  background: #000;
+}
+
+#map-panel-canvas { display: block; width: 100%; height: 100%; }
+
+#map-btn-fermer {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+#map-croix {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+  background: linear-gradient(to bottom, #BA5948, #934843);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(-1px -1px 0 #000) drop-shadow(1px -1px 0 #000)
+          drop-shadow(-1px 1px 0 #000) drop-shadow(1px 1px 0 #000);
+  pointer-events: none;
+}
+
+.map-panel-wrap { display: none; }
+.map-legende    { display: none; }
