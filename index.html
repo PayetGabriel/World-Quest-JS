@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Island Explorer</title>
+  <link rel="stylesheet" href="css/style-base.css">
+  <link rel="stylesheet" href="css/style-panneaux.css">
+</head>
+<body>
+
+  <div id="game-wrapper">
+
+    <div id="titre-screen">
+      <canvas id="titre-particules"></canvas>
+      <div id="titre-contenu">
+        <div id="titre-sous-titre">Un voyage aux quatre coins du monde</div>
+        <div id="titre-nom">WORLD QUEST</div>
+        <div id="titre-lore">
+          Une île mystérieuse renferme les secrets de neuf civilisations.<br>
+          Des gardiens anciens veillent sur chaque monument.<br>
+          Pars à leur découverte. Prouve ta valeur.
+        </div>
+        <button id="titre-bouton-jouer" onclick="demarrerJeu()">Jouer</button>
+      </div>
+    </div>
+
+    <canvas id="game-canvas"></canvas>
+
+    <div id="message-box"></div>
+
+    <!-- Écran de combat : juste le canvas plein écran -->
+    <!-- Le HUD (barres, log, contrôles) est dessiné directement sur ce canvas -->
+    <div id="combat-screen">
+      <canvas id="combat-canvas"></canvas>
+    </div>
+
+    <!-- Log caché utilisé comme stockage texte pour dessinerHUDCombat -->
+    <span id="combat-log" style="display:none;"></span>
+
+    <!-- Inventaire combat (fenêtre DOM par dessus le canvas combat) -->
+    <div id="inventory-screen">
+      <div id="inventory-title">Inventaire</div>
+      <div id="inventory-items">
+        <div class="item-slot" id="slot-potion-heal">
+          <div class="item-name">Potion de soin</div>
+          <div class="item-desc">Restaure 30 PV</div>
+          <div class="item-count" id="count-potion-heal">x0</div>
+          <button class="item-use-btn" onclick="useItem('potion-heal')">Utiliser (F)</button>
+        </div>
+        <div class="item-slot" id="slot-potion-boost">
+          <div class="item-name">Potion de boost</div>
+          <div class="item-desc">+10 ATT pendant 5 tours</div>
+          <div class="item-count" id="count-potion-boost">x0</div>
+          <button class="item-use-btn" onclick="useItem('potion-boost')">Utiliser (G)</button>
+        </div>
+      </div>
+      <div id="inventory-hint">Appuie sur I pour fermer</div>
+    </div>
+
+    <!-- Ces éléments DOM sont gardés pour compatibilité avec mettreAJourBarresCombat -->
+    <!-- Ils sont cachés, les vraies barres sont dessinées sur le canvas combat -->
+    <div style="display:none;">
+      <span id="player-name"></span>
+      <span id="enemy-name"></span>
+      <div id="player-combat-hp-fill"></div>
+      <span id="player-combat-hp-text"></span>
+      <div id="enemy-combat-hp-fill"></div>
+      <span id="enemy-combat-hp-text"></span>
+    </div>
+
+  </div>
+
+  <script src="js/hud-navbar.js"></script>
+  <script src="js/hud-panneaux.js"></script>  
+  <script src="js/titre.js"></script>
+  <script src="js/monuments.js"></script>
+  <script src="js/zones.js"></script>
+  <script src="js/collision.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/camera.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/combat-data.js"></script>
+  <script src="js/combat-physique.js"></script>
+  <script src="js/combat-speciales-base.js"></script>
+  <script src="js/combat-speciales-laser.js"></script>
+  <script src="js/combat-speciales-tp.js"></script>
+  <script src="js/combat-ia.js"></script>
+  <script src="js/combat-ia-monstre.js"></script>
+  <script src="js/combat-hud.js"></script>
+  <script src="js/dev.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
